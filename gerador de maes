@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class MaeGenerator {
+    private static final String[] NOMES = {"Maria", "João", "Ana", "Carlos", "Paula"};
+    private static final String[] SOBRENOMES = {"Oliveira", "Silva", "Santos", "Ferreira", "Costa"};
+    private static final String[] ENDERECOS = {"Rua A", "Rua B", "Rua C", "Avenida X", "Avenida Y"};
+
+    private static String gerarTelefone() {
+        Random random = new Random();
+        StringBuilder telefone = new StringBuilder();
+        for (int i = 0; i < 9; i++) {
+            telefone.append(random.nextInt(10));
+        }
+        return telefone.toString();
+    }
+
+    public static List<Mae> gerarMaes(int quantidade) {
+        List<Mae> pessoas = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < quantidade; i++) {
+            String nome = NOMES[random.nextInt(NOMES.length)];
+            String sobrenome = SOBRENOMES[random.nextInt(SOBRENOMES.length)];
+            int idade = random.nextInt(60) + 18;
+            String endereco = ENDERECOS[random.nextInt(ENDERECOS.length)];
+            String telefone = gerarTelefone();
+
+            pessoas.add(new Pessoa(nome, sobrenome, idade, endereco, telefone));
+        }
+        return pessoas;
+    }
+
+    public static void exibirPessoas(List<Mae> pessoas, String arrayNome) {
+        System.out.println(arrayNome + ":");
+        for (int i = 0; i < pessoas.size(); i++) {
+            System.out.println("pessoa" + (i + 1) + ": " + pessoas.get(i));
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        List<Mae> array1 = gerarMaes(5);
+    }
+}
